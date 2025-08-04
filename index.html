@@ -12,9 +12,10 @@
         <header>
             <div class="unit-toggle-container">
                 <label class="unit-toggle">
+                    <span class="toggle-label-left">Pounds</span>
                     <input type="checkbox" id="unit-toggle">
                     <span class="toggle-slider"></span>
-                    <span class="toggle-label">Pounds / Kilograms</span>
+                    <span class="toggle-label-right">Kilograms</span>
                 </label>
             </div>
             <h1>Weight Distribution Calculator</h1>
@@ -70,35 +71,59 @@
         <!-- Reverse Calculator Section -->
         <div class="calculator-section">
             <h2>Reverse Calculator</h2>
-            <p class="section-description">Enter your plates to calculate total weight</p>
+            <p class="section-description">Tap to add or remove plates</p>
             
             <div class="reverse-calculator">
                 <div class="plate-input-section">
                     <h3>Plates on One Side:</h3>
                     <div class="plate-inputs">
-                        <div class="plate-input-group">
-                            <label for="plate-45">45 lbs:</label>
-                            <input type="number" id="plate-45" min="0" value="0" class="plate-input">
+                        <div class="plate-input-group" data-weight="45">
+                            <div class="plate-label">45 lbs</div>
+                            <div class="plate-counter">
+                                <button class="plate-btn minus" data-action="minus">−</button>
+                                <span class="plate-count">0</span>
+                                <button class="plate-btn plus" data-action="plus">+</button>
+                            </div>
                         </div>
-                        <div class="plate-input-group">
-                            <label for="plate-35">35 lbs:</label>
-                            <input type="number" id="plate-35" min="0" value="0" class="plate-input">
+                        <div class="plate-input-group" data-weight="35">
+                            <div class="plate-label">35 lbs</div>
+                            <div class="plate-counter">
+                                <button class="plate-btn minus" data-action="minus">−</button>
+                                <span class="plate-count">0</span>
+                                <button class="plate-btn plus" data-action="plus">+</button>
+                            </div>
                         </div>
-                        <div class="plate-input-group">
-                            <label for="plate-25">25 lbs:</label>
-                            <input type="number" id="plate-25" min="0" value="0" class="plate-input">
+                        <div class="plate-input-group" data-weight="25">
+                            <div class="plate-label">25 lbs</div>
+                            <div class="plate-counter">
+                                <button class="plate-btn minus" data-action="minus">−</button>
+                                <span class="plate-count">0</span>
+                                <button class="plate-btn plus" data-action="plus">+</button>
+                            </div>
                         </div>
-                        <div class="plate-input-group">
-                            <label for="plate-10">10 lbs:</label>
-                            <input type="number" id="plate-10" min="0" value="0" class="plate-input">
+                        <div class="plate-input-group" data-weight="10">
+                            <div class="plate-label">10 lbs</div>
+                            <div class="plate-counter">
+                                <button class="plate-btn minus" data-action="minus">−</button>
+                                <span class="plate-count">0</span>
+                                <button class="plate-btn plus" data-action="plus">+</button>
+                            </div>
                         </div>
-                        <div class="plate-input-group">
-                            <label for="plate-5">5 lbs:</label>
-                            <input type="number" id="plate-5" min="0" value="0" class="plate-input">
+                        <div class="plate-input-group" data-weight="5">
+                            <div class="plate-label">5 lbs</div>
+                            <div class="plate-counter">
+                                <button class="plate-btn minus" data-action="minus">−</button>
+                                <span class="plate-count">0</span>
+                                <button class="plate-btn plus" data-action="plus">+</button>
+                            </div>
                         </div>
-                        <div class="plate-input-group">
-                            <label for="plate-2-5">2.5 lbs:</label>
-                            <input type="number" id="plate-2-5" min="0" value="0" class="plate-input">
+                        <div class="plate-input-group" data-weight="2.5">
+                            <div class="plate-label">2.5 lbs</div>
+                            <div class="plate-counter">
+                                <button class="plate-btn minus" data-action="minus">−</button>
+                                <span class="plate-count">0</span>
+                                <button class="plate-btn plus" data-action="plus">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>

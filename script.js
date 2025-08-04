@@ -9,6 +9,16 @@ const KG_TO_LBS = 2.20462;
 // Current unit state
 let isMetric = false;
 
+// Plate counts for reverse calculator
+let plateCounts = {
+    45: 0,
+    35: 0,
+    25: 0,
+    10: 0,
+    5: 0,
+    2.5: 0
+};
+
 // DOM elements
 const weightInput = document.getElementById('weight-input');
 const calculateBtn = document.getElementById('calculate-btn');
@@ -85,18 +95,21 @@ function handleUnitToggle() {
 // Update plate labels in reverse calculator
 function updatePlateLabels() {
     const plateLabels = {
-        'plate-45': isMetric ? '20.4 kg' : '45 lbs',
-        'plate-35': isMetric ? '15.9 kg' : '35 lbs',
-        'plate-25': isMetric ? '11.3 kg' : '25 lbs',
-        'plate-10': isMetric ? '4.5 kg' : '10 lbs',
-        'plate-5': isMetric ? '2.3 kg' : '5 lbs',
-        'plate-2-5': isMetric ? '1.1 kg' : '2.5 lbs'
+        45: isMetric ? '20.4 kg' : '45 lbs',
+        35: isMetric ? '15.9 kg' : '35 lbs',
+        25: isMetric ? '11.3 kg' : '25 lbs',
+        10: isMetric ? '4.5 kg' : '10 lbs',
+        5: isMetric ? '2.3 kg' : '5 lbs',
+        2.5: isMetric ? '1.1 kg' : '2.5 lbs'
     };
     
-    Object.entries(plateLabels).forEach(([id, label]) => {
-        const element = document.querySelector(`label[for="${id}"]`);
-        if (element) {
-            element.textContent = label + ':';
+    Object.entries(plateLabels).forEach(([weight, label]) => {
+        const plateGroup = document.querySelector(`[data-weight="${weight}"]`);
+        if (plateGroup) {
+            const labelElement = plateGroup.querySelector('.plate-label');
+            if (labelElement) {
+                labelElement.textContent = label;
+            }
         }
     });
 }
@@ -125,6 +138,39 @@ function convertToImperial(weight) {
 
 function formatWeight(weight, unit) {
     return `${weight.toFixed(1)} ${unit}`;
+}
+
+// Handle plate button clicks
+function handlePlateButtonClick(weight, action) {
+    if (action === 'plus') {
+        plateCounts[weight]++;
+    } else if (action === 'minus' && plateCounts[weight] > 0) {
+        plateCounts[weight]--;
+    }
+    
+    // Update the display
+    updatePlateCountDisplay(weight);
+    
+    // Hide results when plates are modified (user needs to recalculate)
+    reverseResultsDiv.classList.add('hidden');
+}
+
+// Update plate count display
+function updatePlateCountDisplay(weight) {
+    const plateGroup = document.querySelector(`[data-weight="${weight}"]`);
+    if (plateGroup) {
+        const countElement = plateGroup.querySelector('.plate-count');
+        const minusBtn = plateGroup.querySelector('.minus');
+        
+        if (countElement) {
+            countElement.textContent = plateCounts[weight];
+        }
+        
+        // Disable minus button if count is 0
+        if (minusBtn) {
+            minusBtn.disabled = plateCounts[weight] === 0;
+        }
+    }
 }
 
 // Main calculation function
@@ -168,22 +214,13 @@ function calculateWeightDistribution() {
 
 // Reverse calculation function
 function calculateReverseWeight() {
-    const plateInputs = {
-        45: parseInt(document.getElementById('plate-45').value) || 0,
-        35: parseInt(document.getElementById('plate-35').value) || 0,
-        25: parseInt(document.getElementById('plate-25').value) || 0,
-        10: parseInt(document.getElementById('plate-10').value) || 0,
-        5: parseInt(document.getElementById('plate-5').value) || 0,
-        2.5: parseInt(document.getElementById('plate-2-5').value) || 0
-    };
-    
     const calculatorType = document.querySelector('input[name="reverse-calculator-type"]:checked').value;
     
     // Calculate weight per side (always in lbs for plate calculations)
     let weightPerSide = 0;
     const platesPerSide = [];
     
-    Object.entries(plateInputs).forEach(([weight, count]) => {
+    Object.entries(plateCounts).forEach(([weight, count]) => {
         const plateWeight = parseFloat(weight);
         for (let i = 0; i < count; i++) {
             platesPerSide.push(plateWeight);
@@ -192,7 +229,7 @@ function calculateReverseWeight() {
     });
     
     if (weightPerSide === 0) {
-        alert('Please enter at least one plate.');
+        alert('Please add at least one plate before calculating.');
         return;
     }
     
@@ -280,11 +317,11 @@ function displayResults(platesPerSide, totalWeight, barWeight, calculatorType) {
     
     // Show/hide bar weight for bench press
     if (calculatorType === 'bench') {
-        reverseBarWeightDiv.classList.remove('hidden');
-        const barWeightElement = reverseBarWeightDiv.querySelector('.value');
+        barWeightDiv.classList.remove('hidden');
+        const barWeightElement = barWeightDiv.querySelector('.value');
         barWeightElement.textContent = formatWeight(barWeight, unit);
     } else {
-        reverseBarWeightDiv.classList.add('hidden');
+        barWeightDiv.classList.add('hidden');
     }
     
     // Scroll to results
@@ -345,6 +382,22 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlateLabels();
     updateInfoSection();
     
+    // Add event listeners for plate buttons
+    document.querySelectorAll('.plate-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const plateGroup = btn.closest('.plate-input-group');
+            const weight = parseFloat(plateGroup.dataset.weight);
+            const action = btn.dataset.action;
+            handlePlateButtonClick(weight, action);
+        });
+    });
+    
+    // Initialize plate count displays
+    Object.keys(plateCounts).forEach(weight => {
+        updatePlateCountDisplay(weight);
+    });
+    
     // Add example button functionality
     const addExampleButton = () => {
         const exampleBtn = document.createElement('button');
@@ -386,9 +439,20 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         reverseExampleBtn.addEventListener('click', () => {
-            document.getElementById('plate-45').value = '1';
-            document.getElementById('plate-10').value = '1';
-            calculateReverseWeight();
+            // Reset all counts
+            Object.keys(plateCounts).forEach(weight => {
+                plateCounts[weight] = 0;
+                updatePlateCountDisplay(weight);
+            });
+            
+            // Set example values
+            plateCounts[45] = 1;
+            plateCounts[10] = 1;
+            updatePlateCountDisplay(45);
+            updatePlateCountDisplay(10);
+            
+            // Hide results since we're setting up a new example
+            reverseResultsDiv.classList.add('hidden');
         });
         
         document.querySelector('.reverse-calculator').appendChild(reverseExampleBtn);
