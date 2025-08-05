@@ -8,7 +8,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
-    color: #333;
+    color: #495057;
 }
 
 .container {
@@ -34,12 +34,13 @@ header {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 25px;
     padding: 0.5rem 1rem;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     gap: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .unit-toggle input[type="checkbox"] {
@@ -50,7 +51,7 @@ header {
     position: relative;
     width: 50px;
     height: 24px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     transition: background 0.3s ease;
 }
@@ -78,10 +79,10 @@ header {
 
 .toggle-label-left,
 .toggle-label-right {
-    color: white;
+    color: #495057;
     font-weight: 600;
     font-size: 0.9rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
     transition: opacity 0.3s ease;
 }
 
@@ -96,31 +97,34 @@ header {
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    color: white;
 }
 
 header p {
     font-size: 1.1rem;
-    opacity: 0.9;
+    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .calculator-section {
-    background: white;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
     margin-bottom: 2rem;
+    border: 1px solid #dee2e6;
 }
 
 .calculator-section h2 {
-    color: #333;
+    color: #212529;
     margin-bottom: 0.5rem;
     text-align: center;
 }
 
 .section-description {
     text-align: center;
-    color: #666;
+    color: #6c757d;
     margin-bottom: 1.5rem;
     font-style: italic;
 }
@@ -133,21 +137,25 @@ header p {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #555;
+    color: #495057;
 }
 
 .input-group input {
     width: 100%;
     padding: 1rem;
-    border: 2px solid #e1e5e9;
+    border: 2px solid #dee2e6;
     border-radius: 8px;
     font-size: 1.1rem;
     transition: border-color 0.3s ease;
+    background: #ffffff;
+    color: #495057;
 }
 
 .input-group input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #28a745;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
 }
 
 .calculator-type {
@@ -160,6 +168,7 @@ header p {
     margin-bottom: 1rem;
     cursor: pointer;
     font-weight: 500;
+    color: #495057;
 }
 
 .radio-label input[type="radio"] {
@@ -169,7 +178,7 @@ header p {
 .radio-custom {
     width: 20px;
     height: 20px;
-    border: 2px solid #ddd;
+    border: 2px solid #dee2e6;
     border-radius: 50%;
     margin-right: 10px;
     position: relative;
@@ -177,8 +186,8 @@ header p {
 }
 
 .radio-label input[type="radio"]:checked + .radio-custom {
-    border-color: #667eea;
-    background: #667eea;
+    border-color: #28a745;
+    background: #28a745;
 }
 
 .radio-label input[type="radio"]:checked + .radio-custom::after {
@@ -196,7 +205,7 @@ header p {
 .calculate-btn {
     width: 100%;
     padding: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -204,11 +213,14 @@ header p {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .calculate-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
 }
 
 .calculate-btn:active {
@@ -221,7 +233,7 @@ header p {
 }
 
 .plate-input-section h3 {
-    color: #555;
+    color: #495057;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -238,20 +250,22 @@ header p {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background: #f8f9fa;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border-radius: 12px;
     border: 2px solid #e9ecef;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .plate-input-group:hover {
-    border-color: #667eea;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+    border-color: #28a745;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+    transform: translateY(-1px);
 }
 
 .plate-label {
     font-weight: 600;
-    color: #333;
+    color: #495057;
     font-size: 1rem;
 }
 
@@ -276,35 +290,38 @@ header p {
 }
 
 .plate-btn.plus {
-    background: #28a745;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;
 }
 
 .plate-btn.plus:hover {
-    background: #218838;
+    background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
     transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
 }
 
 .plate-btn.minus {
-    background: #dc3545;
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
     color: white;
 }
 
 .plate-btn.minus:hover {
-    background: #c82333;
+    background: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%);
     transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 }
 
 .plate-btn:disabled {
     background: #6c757d;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
 .plate-count {
     font-weight: 700;
     font-size: 1.1rem;
-    color: #333;
+    color: #495057;
     min-width: 30px;
     text-align: center;
 }
@@ -314,11 +331,12 @@ header p {
 }
 
 .results {
-    background: white;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
     margin-bottom: 2rem;
+    border: 1px solid #dee2e6;
 }
 
 .results.hidden {
@@ -326,7 +344,7 @@ header p {
 }
 
 .results h2 {
-    color: #333;
+    color: #212529;
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -338,7 +356,7 @@ header p {
 }
 
 .plate-breakdown h3 {
-    color: #555;
+    color: #495057;
     margin-bottom: 1rem;
 }
 
@@ -349,7 +367,7 @@ header p {
 }
 
 .plate {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -357,6 +375,7 @@ header p {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .plate::before {
@@ -374,36 +393,40 @@ header p {
     display: flex;
     justify-content: space-between;
     padding: 0.75rem;
-    background: #f8f9fa;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     border-radius: 8px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #28a745;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .total-weight-item {
-    background: #e8f5e8;
+    background: linear-gradient(145deg, #d4edda 0%, #c3e6cb 100%);
     border-left-color: #28a745;
     font-weight: 700;
+    border: 1px solid #28a745;
 }
 
 .info-item .label {
     font-weight: 600;
-    color: #555;
+    color: #6c757d;
 }
 
 .info-item .value {
     font-weight: 700;
-    color: #333;
+    color: #495057;
 }
 
 .info-section {
-    background: white;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
+    border: 1px solid #dee2e6;
 }
 
 .info-section h3 {
-    color: #333;
+    color: #212529;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -416,12 +439,14 @@ header p {
 }
 
 .plate-weight {
-    background: #e9ecef;
+    background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
     color: #495057;
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: 600;
     font-size: 0.9rem;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 768px) {
