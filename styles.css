@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2c2c2c, #4a4a4a);
     min-height: 100vh;
     color: #495057;
 }
@@ -225,6 +225,15 @@ header p {
 
 .calculate-btn:active {
     transform: translateY(0);
+}
+
+button {
+    background: linear-gradient(135deg, #004d00, #006600);
+    /* Adjust the colors and angle as needed */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 /* Reverse Calculator Styles */
